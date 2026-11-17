@@ -393,6 +393,46 @@
   }
   @keyframes mzRedactFlick { 0%,100% { opacity: 1; } 18% { opacity: 0.25; } 36% { opacity: 1; } 55% { opacity: 0.45; } 75% { opacity: 1; } }
   @keyframes mzToastIn { from { opacity: 0; transform: translate(-50%, 8px); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+  /* ══ Winter theme ══ (all rules scoped to html.mzw; set MZ_WINTER=false in the script to switch off) */
+  .mzw-fixed { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+  .mzw-vig { position: absolute; inset: 0; box-shadow: inset 0 0 70px -14px rgba(150,205,255,0.16), inset 0 0 150px -50px rgba(190,225,255,0.12); }
+  .mzw-corner { position: absolute; width: min(30vw, 128px); height: min(30vw, 128px); }
+  .mzw-corner--b { width: min(22vw, 92px); height: min(22vw, 92px); opacity: 0.6; }
+  .mzw-fixed--sm .mzw-corner { width: min(17vw, 66px); height: min(17vw, 66px); opacity: 0.85; }
+  .mzw-fixed--sm .mzw-corner--b { width: min(14vw, 54px); height: min(14vw, 54px); opacity: 0.5; }
+  .mzw-corner svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .mzw-fern { fill: none; stroke: #e4f4ff; stroke-width: 0.7; stroke-linecap: round; opacity: 0.5; animation: mzwFrost 7s ease-in-out infinite; }
+  .mzw-fern-glow { fill: none; stroke: #8ec8ff; stroke-width: 2.6; stroke-linecap: round; opacity: 0.12; filter: blur(1.2px); }
+  .mzw-drift { position: absolute; bottom: 0; left: 50%; width: min(100%, 520px); height: 56px; transform: translateX(-50%); }
+  .mzw-halo { position: absolute; top: 38%; left: 50%; width: 300px; height: 300px; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none;
+    background: radial-gradient(circle, rgba(150,205,255,0.17) 0%, rgba(150,205,255,0.05) 50%, transparent 75%); filter: blur(16px); animation: mzwBreathe 6s ease-in-out infinite; }
+  .mzw-icicles { position: absolute; top: 0; left: 0; width: 100%; height: auto; display: block; overflow: visible; pointer-events: none; z-index: 2; }
+  .mzw-icicles--fixed { position: fixed; top: env(safe-area-inset-top, 0px); left: 50%; width: min(100%, 520px); transform: translateX(-50%); z-index: 3; }
+  .mzw-spark { transform-box: fill-box; transform-origin: center; opacity: 0; animation: mzwSpark 3.6s ease-in-out infinite; }
+  .mzw-drip { opacity: 0; animation: mzwDrip 5.4s ease-in infinite; }
+  .mzw-seal-spin { transform-origin: 60px 60px; animation: mzwSpin 70s linear infinite; }
+  .mzw .mzg__seal { position: relative; }
+  .mzw .mzg__seal::before { content: ""; position: absolute; inset: -18px; border-radius: 50%; z-index: -1; pointer-events: none;
+    background: radial-gradient(circle, rgba(165,215,255,0.20), rgba(165,215,255,0.06) 55%, transparent 72%); animation: mzwBreathe 5s ease-in-out infinite; }
+  .mzw .mzg .mzg__key { border-top-color: rgba(214,236,255,0.42); box-shadow: inset 0 0 14px rgba(212,160,23,0.05), inset 0 1px 6px rgba(205,232,255,0.14); }
+  .mzw .mzg--err .mzg__key { border-top-color: rgba(255,84,112,0.35); }
+  .mzw .mzg .mzg__key--fn { border-top-color: transparent; box-shadow: none; }
+  .mzw .mzg .mzg__key i { background: radial-gradient(circle, rgba(226,245,255,0.6), rgba(226,245,255,0) 70%); }
+  .mzw .mzg__cd { margin-top: 6px; }
+  .mzw .mzw-capwrap { position: relative; }
+  .mzw .mzw-capwrap::before { content: ""; position: absolute; top: -6px; left: 34px; right: 34px; height: 7px; pointer-events: none; z-index: 3; opacity: 0.9;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='7' viewBox='0 0 40 7'%3E%3Cpath d='M0 7V3.5C5 3.5 6 .5 11 .5C16 .5 17 3 22 3C27 3 29 1 34 1C37 1 38 3.5 40 3.5V7Z' fill='%23eaf6ff'/%3E%3C/svg%3E") repeat-x left bottom / 40px 7px;
+    filter: drop-shadow(0 0 3px rgba(170,215,255,0.55)); }
+  @keyframes mzwFrost { 0%, 100% { opacity: 0.34; } 50% { opacity: 0.62; } }
+  @keyframes mzwBreathe { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+  @keyframes mzwSpark { 0%, 100% { opacity: 0; transform: scale(0.3); } 45% { opacity: 1; transform: scale(1.5); } 70% { opacity: 0.2; transform: scale(0.8); } }
+  @keyframes mzwDrip { 0% { opacity: 0; transform: translateY(0); } 12% { opacity: 0.9; transform: translateY(0); } 78% { opacity: 0.75; transform: translateY(24px); } 100% { opacity: 0; transform: translateY(27px); } }
+  @keyframes mzwSpin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) {
+    .mzw-fern, .mzw-spark, .mzw-drip, .mzw-seal-spin, .mzw-halo, .mzw .mzg__seal::before { animation: none !important; }
+    .mzw-spark { opacity: 0.7; }
+  }
 </style>
 </head>
 <body>
@@ -8011,14 +8051,14 @@ function ExamCountdown({ ac, compact }) {
     const col = over ? "#34d399" : n > 21 ? "#f59e0b" : n > 7 ? "#f97316" : "#ef4444";
     const glowS = n > 21 ? 4.5 : n > 7 ? 3 : 1.8;
     const NS = 8, si = (((Math.floor(now / 14000) + _mzCdOff) % NS) + NS) % NS;
-    const H = compact ? 134 : 176, grey = "#9aa0ab";
-    const lab = (t) => h("div", { style: { fontFamily: ff, fontSize: compact ? 9.5 : 10, letterSpacing: "0.16em", color: grey, textTransform: "uppercase", marginTop: 2 } }, t);
+    const H = compact ? 88 : 176, grey = "#9aa0ab";
+    const lab = (t) => h("div", { style: { fontFamily: ff, fontSize: compact ? 8 : 10, letterSpacing: compact ? "0.14em" : "0.16em", color: grey, textTransform: "uppercase", marginTop: compact ? 1 : 2 } }, t);
     const fr = { d: Math.min(p.td, 30) / 30, h: p.h / 24, m: p.m / 60, s: p.s / 60 };
-    const tile = (v, label, k, tick) => h("div", { key: k + (tick ? ":" + v : ""), style: { flex: "1 1 0", minWidth: 0, padding: compact ? "8px 2px 7px" : "10px 2px 9px", borderRadius: 10, background: col + "14", border: "1px solid " + col + "44", animation: tick ? "mzSecFlash 1s ease-out" : "none" } },
-        h("div", { key: v, style: { fontFamily: ff, fontSize: compact ? 27 : 33, fontWeight: 700, color: col, lineHeight: 1.1, fontVariantNumeric: "tabular-nums", animation: "mzDigit 0.45s cubic-bezier(0.22,1,0.36,1)" } }, pad(v)), lab(label));
+    const tile = (v, label, k, tick) => h("div", { key: k + (tick ? ":" + v : ""), style: { flex: "1 1 0", minWidth: 0, padding: compact ? "4px 2px 4px" : "10px 2px 9px", borderRadius: 10, background: col + "14", border: "1px solid " + col + "44", animation: tick ? "mzSecFlash 1s ease-out" : "none" } },
+        h("div", { key: v, style: { fontFamily: ff, fontSize: compact ? 21 : 33, fontWeight: 700, color: col, lineHeight: 1.1, fontVariantNumeric: "tabular-nums", animation: "mzDigit 0.45s cubic-bezier(0.22,1,0.36,1)" } }, pad(v)), lab(label));
     const CR = 2 * Math.PI * 29;
     const ring = (k, v, f, l) => h("div", { key: k, style: { flex: "1 1 0", minWidth: 0, textAlign: "center" } },
-        h("svg", { viewBox: "0 0 70 70", style: { width: "100%", maxWidth: compact ? 64 : 76 } }, h("circle", { cx: 35, cy: 35, r: 29, fill: "none", stroke: col + "33", strokeWidth: 4 }),
+        h("svg", { viewBox: "0 0 70 70", style: { width: "100%", maxWidth: compact ? 46 : 76 } }, h("circle", { cx: 35, cy: 35, r: 29, fill: "none", stroke: col + "33", strokeWidth: 4 }),
             h("circle", { cx: 35, cy: 35, r: 29, fill: "none", stroke: col, strokeWidth: 4, strokeLinecap: "round", strokeDasharray: CR, strokeDashoffset: CR * (1 - f), transform: "rotate(-90 35 35)", style: { transition: "stroke-dashoffset 0.9s linear" } }),
             h("text", { x: 35, y: 41, textAnchor: "middle", fontSize: 18, fill: col, style: { fontFamily: ff } }, pad(v))), lab(l));
     let body;
@@ -8031,9 +8071,9 @@ function ExamCountdown({ ac, compact }) {
             h("circle", { cx: 170, cy: 115, r: 86, fill: "none", stroke: col, strokeWidth: 3, strokeLinecap: "round", strokeDasharray: 540.4, strokeDashoffset: 540.4 * (1 - fr.m), transform: "rotate(-90 170 115)", style: { transition: "stroke-dashoffset 0.9s linear" } }),
             h("circle", { cx: 170, cy: 115, r: 76, fill: "none", stroke: col + "22", strokeWidth: 3 }),
             h("circle", { cx: 170, cy: 115, r: 76, fill: "none", stroke: "#d4a017", strokeWidth: 3, strokeLinecap: "round", strokeDasharray: 477.5, strokeDashoffset: 477.5 * (1 - fr.h), transform: "rotate(-90 170 115)", style: { transition: "stroke-dashoffset 0.9s linear" } }),
-            h("text", { x: 170, y: 126, textAnchor: "middle", fontSize: 42, fill: col, style: { fontFamily: ff, fontWeight: 700 } }, pad(p.d)),
-            h("text", { x: 170, y: 144, textAnchor: "middle", fontSize: 11, fill: grey, style: { fontFamily: ff, letterSpacing: "0.2em" } }, p.d === 1 ? "DAY" : "DAYS"),
-            h("text", { x: 170, y: 166, textAnchor: "middle", fontSize: 14, fill: "#eadfb5", style: { fontFamily: ff } }, pad(p.h) + ":" + pad(p.m) + ":" + pad(p.s)));
+            h("text", { x: 170, y: 126, textAnchor: "middle", fontSize: compact ? 50 : 42, fill: col, style: { fontFamily: ff, fontWeight: 700 } }, pad(p.d)),
+            h("text", { x: 170, y: 144, textAnchor: "middle", fontSize: compact ? 17 : 11, fill: grey, style: { fontFamily: ff, letterSpacing: "0.2em" } }, p.d === 1 ? "DAY" : "DAYS"),
+            h("text", { x: 170, y: 166, textAnchor: "middle", fontSize: compact ? 22 : 14, fill: "#eadfb5", style: { fontFamily: ff } }, pad(p.h) + ":" + pad(p.m) + ":" + pad(p.s)));
     } else if (si === 3) {
         const f = fr.d;
         body = h("div", { style: { display: "flex", alignItems: "center", gap: 16 } },
@@ -8044,50 +8084,50 @@ function ExamCountdown({ ac, compact }) {
                 h("line", { x1: 60, y1: 70, x2: 60, y2: 132, stroke: col, strokeWidth: 1.5, strokeDasharray: "3 5", style: { animation: "mzFall 0.6s linear infinite" } }),
                 h("path", { d: "M16,8 H104 M16,142 H104", stroke: "#d4a017", strokeWidth: 3, strokeLinecap: "round" }),
                 h("path", { d: "M20,10 L56,70 V80 L20,140 M100,10 L64,70 V80 L100,140", fill: "none", stroke: "#d4a017", strokeWidth: 2, strokeLinejoin: "round" })),
-            h("div", { style: { textAlign: "left" } }, h("div", { style: { fontFamily: ff, fontSize: compact ? 42 : 48, fontWeight: 700, lineHeight: 1, color: col } }, pad(p.d)), lab(p.d === 1 ? "day left" : "days left"),
+            h("div", { style: { textAlign: "left" } }, h("div", { style: { fontFamily: ff, fontSize: compact ? 30 : 48, fontWeight: 700, lineHeight: 1, color: col } }, pad(p.d)), lab(p.d === 1 ? "day left" : "days left"),
                 h("div", { style: { fontFamily: ff, fontSize: 16, color: "#eadfb5", marginTop: 8, fontVariantNumeric: "tabular-nums" } }, pad(p.h) + "h " + pad(p.m) + "m " + pad(p.s) + "s")));
     } else if (si === 4) {
-        const DH = compact ? 34 : 40, grp = [["d", p.d, "Days"], ["h", p.h, "Hrs"], ["m", p.m, "Min"], ["s", p.s, "Sec"]];
-        const col2 = (val, j) => { const dg = +pad(val).charAt(j); const rows = []; for (let k = 0; k < 10; k++) rows.push(h("div", { key: k, style: { height: DH, lineHeight: DH + "px", textAlign: "center", fontFamily: ff, fontSize: compact ? 22 : 26, fontWeight: 700, color: col } }, k)); return h("span", { key: j, style: { display: "inline-block", width: compact ? 22 : 26, height: DH, overflow: "hidden", background: col + "14", border: "1px solid " + col + "44", borderRadius: 6, margin: "0 1px" } }, h("div", { style: { transform: "translateY(" + (-dg * DH) + "px)", transition: "transform 0.6s cubic-bezier(0.22,1,0.36,1)" } }, rows)); };
+        const DH = compact ? 25 : 40, grp = [["d", p.d, "Days"], ["h", p.h, "Hrs"], ["m", p.m, "Min"], ["s", p.s, "Sec"]];
+        const col2 = (val, j) => { const dg = +pad(val).charAt(j); const rows = []; for (let k = 0; k < 10; k++) rows.push(h("div", { key: k, style: { height: DH, lineHeight: DH + "px", textAlign: "center", fontFamily: ff, fontSize: compact ? 17 : 26, fontWeight: 700, color: col } }, k)); return h("span", { key: j, style: { display: "inline-block", width: compact ? 18 : 26, height: DH, overflow: "hidden", background: col + "14", border: "1px solid " + col + "44", borderRadius: 6, margin: "0 1px" } }, h("div", { style: { transform: "translateY(" + (-dg * DH) + "px)", transition: "transform 0.6s cubic-bezier(0.22,1,0.36,1)" } }, rows)); };
         body = h("div", { style: { textAlign: "center", width: "100%" } },
             h("div", null, grp.map((g, gi) => h("span", { key: g[0], style: { display: "inline-flex", alignItems: "center" } }, gi ? h("span", { style: { color: grey, fontSize: 20, padding: "0 3px" } }, ":") : null, col2(g[1], 0), col2(g[1], 1)))),
-            h("div", { style: { display: "flex", justifyContent: "center", gap: compact ? 30 : 36, marginTop: 6 } }, grp.map(g => h("div", { key: g[0] }, lab(g[2])))));
+            h("div", { style: { display: "flex", justifyContent: "center", gap: compact ? 26 : 36, marginTop: compact ? 3 : 6 } }, grp.map(g => h("div", { key: g[0] }, lab(g[2])))));
     } else if (si === 5) {
         const bpm = p.td >= 30 ? 72 : Math.min(190, Math.round(72 + (30 - p.td) * 3.6));
         const lv = p.td > 21 ? ["Calm", "#639922"] : p.td > 14 ? ["Rising", "#f59e0b"] : p.td > 7 ? ["High", "#f97316"] : ["Critical", "#ef4444"];
         body = h("div", { style: { width: "100%" } },
-            h("svg", { viewBox: "0 0 340 56", style: { width: "100%", height: compact ? 52 : 62 } }, h("path", { d: _MZ_BEAT, fill: "none", stroke: lv[1] + "33", strokeWidth: 2, strokeLinecap: "round", strokeLinejoin: "round" }),
+            h("svg", { viewBox: "0 0 340 56", style: { width: "100%", height: compact ? 34 : 62 } }, h("path", { d: _MZ_BEAT, fill: "none", stroke: lv[1] + "33", strokeWidth: 2, strokeLinecap: "round", strokeLinejoin: "round" }),
                 h("path", { d: _MZ_BEAT, fill: "none", stroke: lv[1], strokeWidth: 2, strokeLinecap: "round", strokeLinejoin: "round", strokeDasharray: "110 600", style: { animation: "mzSweep " + (140 / bpm).toFixed(2) + "s linear infinite" } })),
             h("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 4 } },
-                h("span", { style: { fontFamily: ff, fontSize: 26, fontWeight: 700, color: lv[1] } }, bpm, h("span", { style: { fontSize: 12, color: grey, fontWeight: 400, marginLeft: 4 } }, "bpm")),
+                h("span", { style: { fontFamily: ff, fontSize: compact ? 19 : 26, fontWeight: 700, color: lv[1] } }, bpm, h("span", { style: { fontSize: 12, color: grey, fontWeight: 400, marginLeft: 4 } }, "bpm")),
                 h("span", { style: { fontFamily: ff, fontSize: 12, letterSpacing: "0.16em", textTransform: "uppercase", color: lv[1] } }, lv[0])),
-            h("div", { style: { fontFamily: ff, fontSize: 17, color: "#eadfb5", marginTop: 6, fontVariantNumeric: "tabular-nums" } }, p.d + "d " + pad(p.h) + "h " + pad(p.m) + "m " + pad(p.s) + "s"));
+            h("div", { style: { fontFamily: ff, fontSize: compact ? 13 : 17, color: "#eadfb5", marginTop: compact ? 2 : 6, fontVariantNumeric: "tabular-nums" } }, p.d + "d " + pad(p.h) + "h " + pad(p.m) + "m " + pad(p.s) + "s"));
     } else if (si === 6) {
         const arc = (a0, a1, c) => { const r = 118, X = a => (170 + r * Math.cos(a * Math.PI / 180)).toFixed(1), Y = a => (160 - r * Math.sin(a * Math.PI / 180)).toFixed(1); return h("path", { key: c, d: "M" + X(a0) + " " + Y(a0) + " A" + r + " " + r + " 0 0 1 " + X(a1) + " " + Y(a1), fill: "none", stroke: c, strokeWidth: 14 }); };
         const pn = 1 - Math.min(p.td, 30) / 30;
         body = h("div", { style: { textAlign: "center", width: "100%" } },
-            h("svg", { viewBox: "0 0 340 190", style: { height: H - 32, maxWidth: "100%" } }, arc(178, 122, "#639922"), arc(118, 62, "#BA7517"), arc(58, 2, "#A32D2D"),
+            h("svg", { viewBox: "0 0 340 190", style: { height: compact ? H - 6 : H - 32, maxWidth: "100%" } }, arc(178, 122, "#639922"), arc(118, 62, "#BA7517"), arc(58, 2, "#A32D2D"),
                 h("g", { style: { transform: "rotate(" + (-90 + pn * 180).toFixed(1) + "deg)", transformOrigin: "170px 160px", transition: "transform 1s cubic-bezier(0.34,1.4,0.64,1)" } }, h("line", { x1: 170, y1: 160, x2: 170, y2: 66, stroke: "#eadfb5", strokeWidth: 3, strokeLinecap: "round" })),
                 h("circle", { cx: 170, cy: 160, r: 8, fill: "#eadfb5" }),
                 h("text", { x: 52, y: 184, fontSize: 12, fill: grey, textAnchor: "middle", style: { fontFamily: ff } }, "Prepared"), h("text", { x: 288, y: 184, fontSize: 12, fill: grey, textAnchor: "middle", style: { fontFamily: ff } }, "Panic")),
             h("div", { style: { fontFamily: ff, fontSize: 16, color: "#eadfb5", fontVariantNumeric: "tabular-nums" } }, p.d + "d " + pad(p.h) + "h " + pad(p.m) + "m " + pad(p.s) + "s"));
     } else body = h("div", { style: { width: "100%", textAlign: "center" } },
-        h("div", { style: { fontFamily: "'Share Tech Mono', 'Courier New', monospace", fontSize: compact ? 25 : 30, color: col, fontVariantNumeric: "tabular-nums" } }, p.d + "d " + pad(p.h) + "h " + pad(p.m) + "m " + pad(p.s) + "s"),
-        h("div", { style: { height: 4, borderRadius: 2, background: col + "22", margin: "12px 0 8px", overflow: "hidden" } }, h("i", { style: { display: "block", height: "100%", background: col, width: ((1 - Math.min(p.td, 30) / 30) * 100).toFixed(1) + "%", transition: "width 0.9s linear" } })), lab("Elapsed of the last 30 days"));
+        h("div", { style: { fontFamily: "'Share Tech Mono', 'Courier New', monospace", fontSize: compact ? 20 : 30, color: col, fontVariantNumeric: "tabular-nums" } }, p.d + "d " + pad(p.h) + "h " + pad(p.m) + "m " + pad(p.s) + "s"),
+        h("div", { style: { height: 4, borderRadius: 2, background: col + "22", margin: compact ? "7px 0 5px" : "12px 0 8px", overflow: "hidden" } }, h("i", { style: { display: "block", height: "100%", background: col, width: ((1 - Math.min(p.td, 30) / 30) * 100).toFixed(1) + "%", transition: "width 0.9s linear" } })), lab("Elapsed of the last 30 days"));
     const q = _MZ_QUOTES[_MZ_QORDER[qk % _MZ_QORDER.length]];
-    const dots = h("div", { style: { display: "flex", justifyContent: "center", gap: 6, marginTop: 8 } }, Array.from({ length: NS }, (_, k) => h("button", { key: k, "aria-label": "Style " + (k + 1), onClick: (e) => { e.stopPropagation(); _mzCdAct(() => { _mzCdOff = k - Math.floor(Date.now() / 14000); }); }, style: { width: k === si ? 18 : 6, height: 6, padding: 0, border: "none", borderRadius: 3, background: k === si ? col : col + "44", cursor: "pointer", transition: "width 0.3s, background 0.3s" } })));
-    return h("div", { onClick: () => _mzCdAct(() => { _mzCdOff += 1; }), style: { position: "relative", cursor: "pointer", margin: compact ? "0 auto" : "14px auto 30px", maxWidth: compact ? 340 : 330, width: "100%", padding: compact ? "12px 11px 10px" : "14px 12px 12px", border: "1px solid " + col + "55", borderRadius: 14, background: col + "10", textAlign: "center", animation: "mzCardIn 0.7s both, mzGlow " + glowS + "s ease-in-out infinite", "--mzc": col } },
+    const dots = h("div", { style: { display: "flex", justifyContent: "center", gap: 6, marginTop: compact ? 3 : 8 } }, Array.from({ length: NS }, (_, k) => h("button", { key: k, "aria-label": "Style " + (k + 1), onClick: (e) => { e.stopPropagation(); _mzCdAct(() => { _mzCdOff = k - Math.floor(Date.now() / 14000); }); }, style: { width: k === si ? 18 : 6, height: 6, padding: 0, border: "none", borderRadius: 3, background: k === si ? col : col + "44", cursor: "pointer", transition: "width 0.3s, background 0.3s" } })));
+    return h("div", { onClick: () => _mzCdAct(() => { _mzCdOff += 1; }), style: { position: "relative", cursor: "pointer", margin: compact ? "0 auto" : "14px auto 30px", maxWidth: compact ? 340 : 330, width: "100%", padding: compact ? "7px 10px 6px" : "14px 12px 12px", border: "1px solid " + col + "55", borderRadius: 14, background: col + "10", textAlign: "center", animation: "mzCardIn 0.7s both, mzGlow " + glowS + "s ease-in-out infinite", "--mzc": col } },
         h("style", null, "@keyframes mzDigit { 0% { opacity: 0; transform: translateY(-9px) scale(0.92); } 100% { opacity: 1; transform: none; } } @keyframes mzSecFlash { 0% { box-shadow: 0 0 14px var(--mzc); border-color: var(--mzc); } 100% { box-shadow: 0 0 0 transparent; } } @keyframes mzCardIn { 0% { opacity: 0; transform: translateY(12px); } 100% { opacity: 1; transform: none; } } @keyframes mzGlow { 0%,100% { box-shadow: 0 0 0 transparent; } 50% { box-shadow: 0 0 22px color-mix(in srgb, var(--mzc) 28%, transparent); } } @keyframes mzStyleIn { 0% { opacity: 0; transform: scale(0.96); } 100% { opacity: 1; transform: none; } } @keyframes mzSweep { from { stroke-dashoffset: 600; } to { stroke-dashoffset: -110; } } @keyframes mzFall { to { stroke-dashoffset: -8; } } @keyframes mzQuoteIn { 0% { opacity: 0; transform: translateY(8px); filter: blur(3px); } 100% { opacity: 1; transform: none; filter: none; } } @keyframes mzQuoteBar { 0% { transform: scaleX(0); } 100% { transform: scaleX(1); } } @media (prefers-reduced-motion: reduce) { .mzx * { animation: none !important; } }"),
         h("button", { "aria-label": "Hide countdown", onClick: (e) => { e.stopPropagation(); _mzCdAct(() => { _mzCdHid = true; try { localStorage.setItem("mzn_cd_hidden", "1"); } catch (x) { } }); }, style: { position: "absolute", top: 7, right: 7, width: 26, height: 26, padding: 0, background: "transparent", border: "1px solid " + col + "44", borderRadius: 8, color: "#9a937f", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" } },
             h("svg", { width: 15, height: 15, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round", strokeLinejoin: "round" }, h("path", { d: "M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z" }), h("circle", { cx: 12, cy: 12, r: 3 }), h("path", { d: "M4 4l16 16" }))),
         h("div", { className: "mzx", style: { display: "contents" } },
-            h("div", { style: { fontFamily: ff, fontSize: compact ? 9.5 : 10, fontWeight: 700, letterSpacing: "0.2em", color: col, textTransform: "uppercase", marginBottom: 8 } }, over ? "Block Exam \u00B7 7 Dec \u00B7 Today" : "Block Exam \u00B7 7 Dec"),
+            h("div", { style: { fontFamily: ff, fontSize: compact ? 8.5 : 10, fontWeight: 700, letterSpacing: "0.2em", color: col, textTransform: "uppercase", marginBottom: compact ? 3 : 8 } }, over ? "Block Exam \u00B7 7 Dec \u00B7 Today" : "Block Exam \u00B7 7 Dec"),
             h("div", { key: "s" + si, style: { height: H, display: "flex", alignItems: "center", justifyContent: "center", animation: "mzStyleIn 0.6s ease both" } }, body),
             dots,
             !compact && h("div", { style: { fontFamily: ff, fontSize: 13, color: "#b6bcc8", lineHeight: 1.45, marginTop: 10 } }, quip),
-            h("div", { key: "q" + qk, style: { marginTop: 10, minHeight: compact ? 70 : 84, animation: "mzQuoteIn 0.9s ease both" } },
-                h("div", { style: { fontFamily: ff, fontStyle: "normal", fontSize: compact ? 12.5 : 14, color: "#eadfb5", lineHeight: 1.5 } }, "\u201C" + q[0] + "\u201D"),
-                q[1] && h("div", { style: { fontFamily: ff, fontSize: 9.5, letterSpacing: "0.16em", textTransform: "uppercase", color: col, opacity: 0.85, marginTop: 5 } }, "\u2014 " + q[1])),
+            h("div", { key: "q" + qk, style: { marginTop: compact ? 4 : 10, minHeight: compact ? 42 : 84, display: compact ? "flex" : "block", flexDirection: "column", justifyContent: "center", animation: "mzQuoteIn 0.9s ease both" } },
+                h("div", { style: { fontFamily: ff, fontStyle: "normal", fontSize: compact ? 11 : 14, color: "#eadfb5", lineHeight: compact ? 1.36 : 1.5 } }, "\u201C" + q[0] + "\u201D", compact && q[1] && h("span", { style: { fontSize: 8, letterSpacing: "0.14em", textTransform: "uppercase", color: col, opacity: 0.85, marginLeft: 6, whiteSpace: "nowrap" } }, "\u2014 " + q[1])),
+                !compact && q[1] && h("div", { style: { fontFamily: ff, fontSize: 9.5, letterSpacing: "0.16em", textTransform: "uppercase", color: col, opacity: 0.85, marginTop: 5 } }, "\u2014 " + q[1])),
             h("div", { style: { height: 2, borderRadius: 2, background: col + "22", overflow: "hidden", marginTop: 2 } }, h("div", { key: "b" + qk, style: { height: "100%", background: col, transformOrigin: "left", animation: "mzQuoteBar 9s linear forwards" } }))));
 }
 function CaliphModuleWrapper({ children, topicAccent, moduleId }) {
@@ -9054,6 +9094,160 @@ const differentials = [
 ];
 const allConds = differentials.flatMap(cat => cat.conditions.map(c => ({ ...c, category: cat.category, icon: cat.icon })));
 const totalDx = allConds.reduce((n, c) => n + c.ddx.length, 0);
+/* ═══ WINTER THEME ═══════════════════════════════════════════════════════════
+   Snow, frost and icicles for the passkey gate, the course chooser and Home.
+   Flip MZ_WINTER to false to switch the whole layer off. */
+const MZ_WINTER = true;
+if (MZ_WINTER && typeof document !== "undefined") document.documentElement.classList.add("mzw");
+const _mzwReduce = () => { try { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } };
+// Frost fern: one deterministic branching crystal, reused (mirrored) in the four corners.
+const _mzwFern = (() => {
+    let d = "";
+    const twig = (x, y, a, len, depth) => {
+        const x2 = x + Math.cos(a) * len, y2 = y + Math.sin(a) * len;
+        d += "M" + x.toFixed(1) + " " + y.toFixed(1) + "L" + x2.toFixed(1) + " " + y2.toFixed(1);
+        if (depth >= 3 || len < 6) return;
+        [0.38, 0.68].forEach((t, k) => {
+            const bx = x + (x2 - x) * t, by = y + (y2 - y) * t, l = len * (0.46 - k * 0.06);
+            twig(bx, by, a - 0.85, l, depth + 1);
+            twig(bx, by, a + 0.85, l, depth + 1);
+        });
+    };
+    [0.1, 0.42, 0.785, 1.15, 1.47].forEach((a, i) => twig(0, 0, a, i === 2 ? 118 : 88 - Math.abs(i - 2) * 6, 0));
+    return d;
+})();
+const _mzwIcicles = (() => {
+    let seed = 7; const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+    const items = []; let x = -6;
+    while (x < 486) { const w = 14 + rnd() * 20, len = 9 + Math.pow(rnd(), 1.6) * 34; items.push({ x, w, len }); x += w * 0.78; }
+    return items;
+})();
+function MzIcicles({ fixed }) {
+    if (!MZ_WINTER) return null;
+    const h = React.createElement;
+    const tips = _mzwIcicles.slice().sort((a, b) => b.len - a.len).slice(0, 4);
+    return h("svg", { className: "mzw-icicles" + (fixed ? " mzw-icicles--fixed" : ""), viewBox: "0 0 480 56", "aria-hidden": "true" },
+        h("defs", null,
+            h("linearGradient", { id: "mzwIceG", x1: 0, y1: 0, x2: 0, y2: 1 }, h("stop", { offset: "0%", stopColor: "#e6f5ff", stopOpacity: 0.62 }), h("stop", { offset: "60%", stopColor: "#a9d6ff", stopOpacity: 0.28 }), h("stop", { offset: "100%", stopColor: "#8cc4ff", stopOpacity: 0.05 })),
+            h("linearGradient", { id: "mzwRimG", x1: 0, y1: 0, x2: 0, y2: 1 }, h("stop", { offset: "0%", stopColor: "#f3faff", stopOpacity: 0.7 }), h("stop", { offset: "100%", stopColor: "#cfe9ff", stopOpacity: 0 }))),
+        h("rect", { x: -10, y: 0, width: 500, height: 7, fill: "url(#mzwRimG)" }),
+        _mzwIcicles.map((c, i) => h("path", { key: i, fill: "url(#mzwIceG)", stroke: "rgba(235,247,255,0.38)", strokeWidth: 0.5,
+            d: "M" + c.x + " 0C" + (c.x + c.w * 0.18) + " " + (c.len * 0.55) + " " + (c.x + c.w * 0.42) + " " + (c.len * 0.8) + " " + (c.x + c.w * 0.5) + " " + c.len + "C" + (c.x + c.w * 0.58) + " " + (c.len * 0.8) + " " + (c.x + c.w * 0.82) + " " + (c.len * 0.55) + " " + (c.x + c.w) + " 0Z" })),
+        tips.map((c, i) => h("circle", { key: "s" + i, className: "mzw-spark", cx: c.x + c.w / 2, cy: c.len, r: 1.5, fill: "#fff", style: { animationDelay: (i * 0.9) + "s" } })),
+        h("circle", { className: "mzw-drip", cx: tips[0].x + tips[0].w / 2, cy: tips[0].len + 2, r: 1.3, fill: "#d8efff" }));
+}
+// Snow: one canvas, three depth bands, wind that reacts to scrolling/swiping, tap-bursts and an unlock flurry.
+function MzSnow() {
+    const ref = useRef(null);
+    useEffect(() => {
+        const cv = ref.current; if (!cv) return;
+        const ctx = cv.getContext("2d"); if (!ctx) return;
+        const reduce = _mzwReduce();
+        let W = 0, H = 0, raf = 0, last = 0, gust = 0, par = 0, alive = true;
+        const sprite = (n, draw) => { const c = document.createElement("canvas"); c.width = c.height = n; draw(c.getContext("2d"), n); return c; };
+        const dotS = sprite(32, (g, n) => { const r = g.createRadialGradient(n / 2, n / 2, 0, n / 2, n / 2, n / 2); r.addColorStop(0, "rgba(255,255,255,1)"); r.addColorStop(0.3, "rgba(238,248,255,0.9)"); r.addColorStop(1, "rgba(215,236,255,0)"); g.fillStyle = r; g.fillRect(0, 0, n, n); });
+        const cryS = sprite(64, (g, n) => {
+            g.translate(n / 2, n / 2); g.strokeStyle = "rgba(236,248,255,0.95)"; g.lineWidth = 2.2; g.lineCap = "round";
+            for (let i = 0; i < 6; i++) { g.save(); g.rotate(i * Math.PI / 3); g.beginPath(); g.moveTo(0, 0); g.lineTo(0, -27); g.moveTo(0, -17); g.lineTo(-7, -24); g.moveTo(0, -17); g.lineTo(7, -24); g.moveTo(0, -9); g.lineTo(-5, -14); g.moveTo(0, -9); g.lineTo(5, -14); g.stroke(); g.restore(); }
+        });
+        const flakes = [], bits = [];
+        const spawn = (first) => {
+            const d = Math.random(), crystal = d > 0.8 && Math.random() < 0.55;
+            return { x: Math.random() * W, y: first ? Math.random() * H : -12 - Math.random() * 40, d, crystal, r: crystal ? 7 + d * 7 : 1.1 + d * d * 4, vy: 16 + d * 44, sw: 5 + d * 15, ph: Math.random() * 6.28, pv: 0.5 + d * 0.9, a: 0.28 + d * 0.55, rot: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.9 };
+        };
+        const fit = () => {
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            W = window.innerWidth; H = window.innerHeight;
+            cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            const want = Math.round(Math.min(78, Math.max(36, W / 6)));
+            while (flakes.length < want) flakes.push(spawn(true));
+            flakes.length = Math.min(flakes.length, want);
+            flakes.forEach(f => { if (f.x > W) f.x = Math.random() * W; if (f.y > H) f.y = Math.random() * H; });
+        };
+        const draw = (t, dt) => {
+            const wind = Math.sin(t * 0.00021) * 13 + Math.sin(t * 0.00063 + 1.3) * 6 + gust;
+            gust *= Math.pow(0.1, dt);
+            const pdy = par; par = 0;
+            ctx.clearRect(0, 0, W, H);
+            for (let i = 0; i < flakes.length; i++) {
+                const f = flakes[i];
+                f.ph += dt * f.pv; f.rot += dt * f.vr;
+                f.y += f.vy * dt - pdy * (0.08 + f.d * 0.4);
+                f.x += (Math.sin(f.ph) * f.sw + wind * (0.35 + f.d * 0.9)) * dt;
+                if (f.y > H + 14) { f.y = -12; f.x = Math.random() * W; } else if (f.y < -40) { f.y = H + 10; f.x = Math.random() * W; }
+                if (f.x < -24) f.x = W + 20; else if (f.x > W + 24) f.x = -20;
+                ctx.globalAlpha = f.a * (f.d > 0.6 ? 0.8 + 0.2 * Math.sin(f.ph * 3.1) : 1);
+                if (f.crystal) { ctx.save(); ctx.translate(f.x, f.y); ctx.rotate(f.rot); ctx.drawImage(cryS, -f.r, -f.r, f.r * 2, f.r * 2); ctx.restore(); }
+                else { const sz = f.r * 2.2; ctx.drawImage(dotS, f.x - sz, f.y - sz, sz * 2, sz * 2); }
+            }
+            for (let i = bits.length - 1; i >= 0; i--) {
+                const b = bits[i]; b.life -= dt;
+                if (b.life <= 0) { bits.splice(i, 1); continue; }
+                b.vx *= (1 - dt * 0.9); b.vy += b.g * dt; b.x += (b.vx + wind * 0.3) * dt; b.y += b.vy * dt;
+                ctx.globalAlpha = Math.min(1, b.life / b.max * 1.6) * 0.9;
+                const sz = b.r * 2.2; ctx.drawImage(dotS, b.x - sz, b.y - sz, sz * 2, sz * 2);
+            }
+            ctx.globalAlpha = 1;
+        };
+        const frame = (t) => { if (!alive) return; raf = requestAnimationFrame(frame); const dt = Math.min(0.05, (t - (last || t)) / 1000); last = t; draw(t, dt); };
+        const onBurst = (e) => {
+            const d = (e && e.detail) || {};
+            if (d.flurry) { for (let i = 0; i < 64; i++) { const life = 1.6 + Math.random(); bits.push({ x: Math.random() * W, y: H + 8, vx: (Math.random() - 0.5) * 80, vy: -(260 + Math.random() * 420), g: 340, r: 1 + Math.random() * 2.6, life, max: life }); } gust += 60; if (reduce) draw(performance.now(), 0.016); return; }
+            for (let i = 0; i < (d.n || 7); i++) { const a = Math.random() * 6.283, sp = 30 + Math.random() * 70, life = 0.7 + Math.random() * 0.7; bits.push({ x: d.x, y: d.y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 40, g: 120, r: 0.8 + Math.random() * 1.7, life, max: life }); }
+        };
+        const tops = new WeakMap(), lefts = new WeakMap();
+        const onScroll = (e) => {
+            const el = e.target; if (!el || typeof el.scrollTop !== "number") return;
+            const pt = tops.has(el) ? tops.get(el) : el.scrollTop, pl = lefts.has(el) ? lefts.get(el) : el.scrollLeft;
+            const dy = el.scrollTop - pt, dx = el.scrollLeft - pl;
+            tops.set(el, el.scrollTop); lefts.set(el, el.scrollLeft);
+            if (dy) { par += dy; gust += Math.max(-40, Math.min(40, dy * 0.5)); }
+            if (dx) gust += Math.max(-50, Math.min(50, -dx * 0.35));
+            gust = Math.max(-70, Math.min(70, gust));
+        };
+        const onResize = () => { fit(); if (reduce) draw(performance.now(), 0); };
+        const onVis = () => { if (document.hidden) { cancelAnimationFrame(raf); raf = 0; } else if (!reduce && !raf) { last = 0; raf = requestAnimationFrame(frame); } };
+        fit();
+        if (reduce) draw(performance.now(), 0); else raf = requestAnimationFrame(frame);
+        window.addEventListener("resize", onResize);
+        window.addEventListener("mzw-burst", onBurst);
+        window.addEventListener("scroll", onScroll, true);
+        document.addEventListener("visibilitychange", onVis);
+        return () => {
+            alive = false; cancelAnimationFrame(raf);
+            window.removeEventListener("resize", onResize); window.removeEventListener("mzw-burst", onBurst);
+            window.removeEventListener("scroll", onScroll, true); document.removeEventListener("visibilitychange", onVis);
+        };
+    }, []);
+    return React.createElement("canvas", { ref, "aria-hidden": "true", style: { position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" } });
+}
+// Fixed overlay: icy vignette + frost ferns in the corners + snow (+ optional snowbank for the gate).
+function MzWinterFixed({ z = 2, drift, sm }) {
+    if (!MZ_WINTER) return null;
+    const h = React.createElement;
+    const top = "env(safe-area-inset-top, 0px)";
+    const corner = (k, tf, pos, b) => h("div", { key: k, className: "mzw-corner" + (b ? " mzw-corner--b" : ""), style: Object.assign({ transform: tf }, pos) },
+        h("svg", { viewBox: "-2 -2 128 128", "aria-hidden": "true" }, h("path", { className: "mzw-fern-glow", d: _mzwFern }), h("path", { className: "mzw-fern", d: _mzwFern })));
+    return h("div", { className: "mzw-fixed" + (sm ? " mzw-fixed--sm" : ""), "aria-hidden": "true", style: { zIndex: z } },
+        h("div", { className: "mzw-vig" }),
+        corner("tl", "none", { top, left: 0 }),
+        corner("tr", "scaleX(-1)", { top, right: 0 }),
+        corner("bl", "scaleY(-1)", { bottom: 0, left: 0 }, true),
+        corner("br", "scale(-1,-1)", { bottom: 0, right: 0 }, true),
+        drift && h("svg", { className: "mzw-drift", viewBox: "0 0 520 60", preserveAspectRatio: "none", "aria-hidden": "true" },
+            h("defs", null, h("linearGradient", { id: "mzwDriftG", x1: 0, y1: 0, x2: 0, y2: 1 }, h("stop", { offset: "0%", stopColor: "#eaf6ff", stopOpacity: 0.34 }), h("stop", { offset: "100%", stopColor: "#bfe0ff", stopOpacity: 0.05 }))),
+            h("path", { d: "M0 60V38C40 26 70 24 110 32C150 40 170 20 220 20C270 20 290 40 340 34C390 28 420 22 460 28C490 32 505 36 520 34V60Z", fill: "url(#mzwDriftG)" })),
+        h(MzSnow, null));
+}
+function MzHeroFrost() {
+    if (!MZ_WINTER) return null;
+    return React.createElement(React.Fragment, null, React.createElement("div", { className: "mzw-halo", "aria-hidden": "true" }), React.createElement(MzIcicles, null));
+}
+window.MzWinter = {
+    Fixed: MzWinterFixed, Icicles: MzIcicles, on: MZ_WINTER,
+    burst: (el) => { try { const r = el.getBoundingClientRect(); window.dispatchEvent(new CustomEvent("mzw-burst", { detail: { x: r.left + r.width / 2, y: r.top + r.height / 2, n: 7 } })); } catch (e) { } },
+    flurry: () => { try { window.dispatchEvent(new CustomEvent("mzw-burst", { detail: { flurry: true } })); } catch (e) { } },
+};
 function CosmicBackground() {
     const toDeg = (dy, dx) => (Math.atan2(dy, dx) * 180) / Math.PI;
     const comets = [
@@ -9229,7 +9423,7 @@ function ChooserOriginal({ options, currentTrack, onPick, stats }) {
             const active = opt.id === currentTrack;
             const title = String(opt.label).toUpperCase();
             const fs = title.length > 10 ? 21 : title.length > 8 ? 24 : 27;
-            return React.createElement("div", { key: opt.id, ref: el => { cardRefs.current[i] = el; }, style: { flex: "0 0 clamp(150px, 43%, 206px)", scrollSnapAlign: "start", transition: "transform .12s linear, opacity .12s linear", willChange: "transform, opacity" } },
+            return React.createElement("div", { key: opt.id, className: "mzw-capwrap", ref: el => { cardRefs.current[i] = el; }, style: { flex: "0 0 clamp(150px, 43%, 206px)", scrollSnapAlign: "start", transition: "transform .12s linear, opacity .12s linear", willChange: "transform, opacity" } },
                 React.createElement("button", { onClick: () => onPick(opt.id), className: "trk-card caliph-hero-pattern-drift", "aria-label": "Select " + opt.label, style: {
                         display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", width: "100%", height: 458,
                         cursor: "pointer", padding: "20px 10px 16px", fontFamily: FF, position: "relative", overflow: "hidden", textAlign: "center",
@@ -9542,6 +9736,7 @@ function TrackChooser({ onPick: onPickReal, currentTrack }) {
             flex: 1, overflowY: "auto", position: "relative",
             backgroundImage: PATTERN_HERO, backgroundSize: "80px 80px",
         }, className: "caliph-hero-pattern-drift" },
+        React.createElement(MzWinterFixed, { z: 2, sm: true }),
         React.createElement("div", { style: { padding: "48px 20px 26px", background: "rgba(3,3,3,0.40)", position: "relative", zIndex: 1 } },
             React.createElement("div", { className: "caliph-hero-glow-deep" }),
             React.createElement("div", { className: "caliph-hero-glow" }),
@@ -9550,6 +9745,7 @@ function TrackChooser({ onPick: onPickReal, currentTrack }) {
                     position: "absolute", inset: 0, pointerEvents: "none",
                     background: "radial-gradient(ellipse 90% 80% at 50% 0%, transparent 45%, rgba(0,0,0,0.40) 100%)",
                 } }),
+            React.createElement(MzHeroFrost, null),
             React.createElement("div", { style: { position: "relative", textAlign: "center" } },
                 React.createElement("div", { style: { fontSize: 9, letterSpacing: "0.28em", color: "#4a4a4a", marginBottom: 14, fontFamily: FF, textTransform: "uppercase" } }, "Choose Your Course of Study"),
                 React.createElement("div", { style: { display: "flex", justifyContent: "center" }, className: "caliph-logo-glow" },
@@ -9847,6 +10043,7 @@ function Home({ onTopic, onCond, onModuleJump, search, setSearch, track, onSwitc
             flex: 1, overflowY: "auto", overflowX: "hidden", touchAction: "pan-y", position: "relative",
             backgroundImage: PATTERN_HERO, backgroundSize: "80px 80px",
         }, className: "caliph-hero-pattern-drift" },
+        React.createElement(MzWinterFixed, { z: 2, sm: true }),
         React.createElement("div", { style: {
                 padding: "42px 20px 22px",
                 background: "rgba(3,3,3,0.40)",
@@ -9859,6 +10056,7 @@ function Home({ onTopic, onCond, onModuleJump, search, setSearch, track, onSwitc
                     position: "absolute", inset: 0, pointerEvents: "none",
                     background: "radial-gradient(ellipse 90% 80% at 50% 0%, transparent 45%, rgba(0,0,0,0.60) 100%)",
                 } }),
+            React.createElement(MzHeroFrost, null),
             React.createElement("div", { style: { position: "relative", textAlign: "center" } },
                 React.createElement("div", { style: {
                         fontSize: 9, letterSpacing: "0.28em", color: "#3a3a3a",
@@ -77455,7 +77653,7 @@ function PasscodeGate({ onUnlock }) {
         setTimeout(async () => {
             const hsh = await hashPasscode(code);
             if (hsh === PASSCODE_HASH) {
-                setStatus("ok"); buzz([12, 40, 24]);
+                setStatus("ok"); buzz([12, 40, 24]); window.MzWinter && window.MzWinter.flurry();
                 setTimeout(onUnlock, 900);
             } else {
                 setStatus("err"); buzz([40, 50, 40]);
@@ -77476,14 +77674,15 @@ function PasscodeGate({ onUnlock }) {
         window.addEventListener("keydown", onKey);
         return () => window.removeEventListener("keydown", onKey);
     }, []);
-    const errLbl = useMemo(() => { const L = ["Wrong passcode. Try again.", "Access denied. Pimping imminent.", "Wrong code. Your logbook has been updated.", "Intruder detected. Sending a BR.", "Wrong code. The viva examiner is smiling."]; return L[Math.floor(Math.random() * L.length)]; }, [status]);
+    const errLbl = useMemo(() => { const L = ["Wrong passcode. Try again.", "Access denied. Pimping imminent.", "Wrong code. Your logbook has been updated.", "Intruder detected. Sending a BR.", "Wrong code. The viva examiner is smiling.", "Wrong code. Frostbite imminent.", "Access denied. You are snowed out.", "Wrong passcode. It is cold out there."]; return L[Math.floor(Math.random() * L.length)]; }, [status]);
     const label = status === "err" ? errLbl : status === "ok" ? "Unlocked" : "Enter passcode";
     // seal: tick ring + octagram + Arabic wordmark, same visual language as the astrolabe
     const C = 60, ticks = [];
     for (let i = 0; i < 72; i++) { const a = i / 72 * Math.PI * 2, mj = i % 6 === 0, r1 = mj ? 44.5 : 47, r2 = 50.5; ticks.push(h("line", { key: i, x1: C + r1 * Math.cos(a), y1: C + r1 * Math.sin(a), x2: C + r2 * Math.cos(a), y2: C + r2 * Math.sin(a), strokeWidth: mj ? 1 : 0.5, opacity: mj ? 0.85 : 0.4 })); }
     const sq = (off) => [0, 1, 2, 3].map(k => { const a = (off + k * 90) * Math.PI / 180; return (k ? "L" : "M") + (C + 37 * Math.cos(a)).toFixed(2) + "," + (C + 37 * Math.sin(a)).toFixed(2); }).join(" ") + " Z";
-    const keyBtn = (d, i) => h("button", { key: d, className: "mzg__key", style: { animationDelay: (0.12 + i * 0.03) + "s" }, onClick: () => press(d) }, d, hit && hit.split(":")[0] === d && h("i", { key: hit }));
+    const keyBtn = (d, i) => h("button", { key: d, className: "mzg__key", style: { animationDelay: (0.12 + i * 0.03) + "s" }, onClick: (e) => { press(d); window.MzWinter && window.MzWinter.burst(e.currentTarget); } }, d, hit && hit.split(":")[0] === d && h("i", { key: hit }));
     const Count = typeof window !== "undefined" && window.ExamCountdown;
+    const MW = typeof window !== "undefined" && window.MzWinter && window.MzWinter.on ? window.MzWinter : null;
     return h("div", { className: `mizan-lock mzg mzg--${status}` },
         h("style", null, `
             .mzg { background: radial-gradient(circle at 50% 36%, #1b1409 0%, #0a0908 55%, #020202 100%) !important; justify-content: flex-start; overflow-y: auto; overflow-x: hidden; padding: 18px 18px 22px; }
@@ -77526,12 +77725,15 @@ function PasscodeGate({ onUnlock }) {
             @media (prefers-reduced-motion: reduce) { .mzg *, .mzg { animation-duration: 0.01s !important; animation-iteration-count: 1 !important; } }
         `),
         h("div", { className: "mzg__pat", style: { backgroundImage: typeof window !== "undefined" && window.PATTERN_HERO ? window.PATTERN_HERO : "none" } }),
+        MW && h(MW.Fixed, { z: 1, drift: true }),
+        MW && h(MW.Icicles, { fixed: true }),
         h("div", { className: "mzg__body" },
             h("div", { className: "mzg__seal" },
                 h("svg", { viewBox: "0 0 120 120", "aria-hidden": "true" },
                     h("defs", null, h("linearGradient", { id: "mzgGold", x1: "0", y1: "0", x2: "1", y2: "1" }, h("stop", { offset: "0%", stopColor: "#f6e2a0" }), h("stop", { offset: "50%", stopColor: "#d4a017" }), h("stop", { offset: "100%", stopColor: "#8a6508" }))),
                     h("circle", { className: "mzg__ring", cx: C, cy: C, r: 54, strokeWidth: 1.5 }),
                     h("circle", { cx: C, cy: C, r: 57.5, fill: "none", stroke: "#d4a017", strokeWidth: 0.5, opacity: 0.35 }),
+                    MW && h("g", { className: "mzw-seal-spin" }, [0, 1, 2, 3, 4, 5].map(k => { const a = k * Math.PI / 3 - Math.PI / 2; return h("path", { key: "wf" + k, d: "M0,-4.2L0,4.2M-3.6,-2.1L3.6,2.1M-3.6,2.1L3.6,-2.1", transform: "translate(" + (C + 66 * Math.cos(a)).toFixed(2) + " " + (C + 66 * Math.sin(a)).toFixed(2) + ")", stroke: "#dff2ff", strokeWidth: 0.8, strokeLinecap: "round", fill: "none", opacity: 0.8 }); })),
                     h("g", { className: "mzg__spin", stroke: "#d4a017" }, ticks),
                     h("g", { className: "mzg__spin2" }, h("path", { d: sq(45), fill: "none", stroke: "#f0d48a", strokeWidth: 0.8, opacity: 0.7 }), h("path", { d: sq(0), fill: "none", stroke: "#f0d48a", strokeWidth: 0.8, opacity: 0.7 })),
                     h("circle", { cx: C, cy: C, r: 25, fill: "#0a0908", stroke: "url(#mzgGold)", strokeWidth: 1.1 }),
